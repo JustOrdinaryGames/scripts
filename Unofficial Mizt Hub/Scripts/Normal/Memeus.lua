@@ -1,9 +1,9 @@
-local amdead = false
+local killScript = false
 
 coroutine.wrap(function()
     while wait() do
-		if _G.JustsMiztHubDisabled == true then
-			amdead = true
+		if not game.Players.LocalPlayer.Character:FindFirstChild("Dummy") then
+			killScript = true
 			break
 		end
 	end
@@ -200,7 +200,7 @@ script.Heartbeat:Fire()
 
 game:GetService("RunService").Heartbeat:connect(
     function(s, p)
-        if amdead then return end
+        if killScript then return end
         tf = tf + s
         if tf >= frame then
             if allowframeloss then
@@ -225,38 +225,7 @@ game:GetService("RunService").Heartbeat:connect(
 -------------------------------------------------------
 
 function CameraEnshaking(Length, Intensity) --Took Straight from StarGlitcher!
-    coroutine.resume(
-        coroutine.create(
-            function()
-                local intensity = 1 * Intensity
-                local rotM = 0.01 * Intensity
-                for i = 0, Length, 0.1 do
-                    swait()
-                    intensity = intensity - 0.05 * Intensity / Length
-                    rotM = rotM - 5.0E-4 * Intensity / Length
-                    hum.CameraOffset =
-                        Vec3(
-                        radian(random(-intensity, intensity)),
-                        radian(random(-intensity, intensity)),
-                        radian(random(-intensity, intensity))
-                    )
-                    cam.CFrame =
-                        cam.CFrame *
-                        cFrame(
-                            radian(random(-intensity, intensity)),
-                            radian(random(-intensity, intensity)),
-                            radian(random(-intensity, intensity))
-                        ) *
-                        Euler(
-                            radian(random(-intensity, intensity)) * rotM,
-                            radian(random(-intensity, intensity)) * rotM,
-                            radian(random(-intensity, intensity)) * rotM
-                        )
-                end
-                Humanoid.CameraOffset = Vec3(0, 0, 0)
-            end
-        )
-    )
+    
 end
 
 local joyemoji = Instance.new("ParticleEmitter", tors)
@@ -3689,7 +3658,7 @@ end
 MoreTaunts = false
 mouse.KeyDown:connect(
     function(key)
-        if amdead then return end
+        if killScript then return end
         if attack == false then
             if MoreTaunts == false then
                 if key == "q" then
@@ -3792,7 +3761,7 @@ mouse.KeyDown:connect(
 --End Attacks N Stuff--
 -------------------------------------------------------
 
-while jumping and _G.JustsMiztHubDisabled == false do
+while jumping and not killScript do
     Humanoid.Jump = true
     wait(0.9)
 end
@@ -3807,7 +3776,7 @@ local val = 0
 local toim = 0
 local idleanim = 0.4
 hum.Animator.Parent = nil
-while true and _G.JustsMiztHubDisabled == false do
+while true and not killScript do
     swait()
     sine = sine + change
     local torvel = (root.Velocity * Vector3.new(1, 0, 1)).magnitude

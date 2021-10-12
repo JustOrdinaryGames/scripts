@@ -1,9 +1,9 @@
-local amdead = false
+local killScript = false
 
 coroutine.wrap(function()
     while wait() do
-		if _G.JustsMiztHubDisabled == true then
-			amdead = true
+		if not game.Players.LocalPlayer.Character:FindFirstChild("Dummy") then
+			killScript = true
 			break
 		end
 	end
@@ -181,7 +181,7 @@ end
 
 coroutine.wrap(
     function()
-        while wait() and _G.JustsMiztHubDisabled == false do
+        while wait() and not killScript do
             hum.WalkSpeed = ws
             LeftArm.Transparency = 1
             RightArm.Transparency = 1
@@ -240,7 +240,7 @@ script.Heartbeat:Fire()
 
 game:GetService("RunService").Heartbeat:connect(
     function(s, p)
-		if amdead then return end
+		if killScript then return end
         tf = tf + s
         if tf >= frame then
             if allowframeloss then
@@ -335,7 +335,7 @@ end
 
 mouse.KeyDown:connect(
     function(Press)
-		if amdead then return end
+		if killScript then return end
         Press = Press:lower()
         if Press == "k" then
             if dancing then
@@ -354,7 +354,7 @@ mouse.KeyDown:connect(
                 lol90 = 0
                 coroutine.wrap(
                     function()
-                        while dancing and _G.JustsMiztHubDisabled == false do
+                        while dancing and not killScript do
                             lol90 = lol90 + 11
                             ROOTLERP.C0 =
                                 ROOTLERP.C0:Lerp(
@@ -419,7 +419,7 @@ mouse.KeyDown:connect(
 
 mouse.KeyDown:connect(
     function(Press)
-		if amdead then return end
+		if killScript then return end
         Press = Press:lower()
         if Press == "j" then
             if dancing then
@@ -457,7 +457,7 @@ mouse.KeyDown:connect(
                     function()
                         coroutine.wrap(
                             function()
-                                while wait(.35) and _G.JustsMiztHubDisabled == false do
+                                while wait(.35) and not killScript do
                                     if not dancing then
                                         break
                                     end
@@ -482,7 +482,7 @@ mouse.KeyDown:connect(
                                 end
                             end
                         )()
-                        while dancing and _G.JustsMiztHubDisabled == false do
+                        while dancing and not killScript do
                             g1.CFrame = g1.CFrame:lerp(CFrame.new(Root.Position, mouse.Hit.p), .4)
                             ROOTLERP.C0 =
                                 ROOTLERP.C0:Lerp(
@@ -526,7 +526,7 @@ mouse.KeyDown:connect(
 
 mouse.KeyDown:connect(
     function(Press)
-		if amdead then return end
+		if killScript then return end
         Press = Press:lower()
         if Press == "h" then
             if dancing then
@@ -544,7 +544,7 @@ mouse.KeyDown:connect(
                 jellyfishjam:Play()
                 coroutine.wrap(
                     function()
-                        while dancing and _G.JustsMiztHubDisabled == false do
+                        while dancing and not killScript do
                             for i = 1, 15 do
                                 if not dancing then
                                     break
@@ -726,7 +726,7 @@ mouse.KeyDown:connect(
 
 mouse.KeyDown:connect(
     function(Press)
-		if amdead then return end
+		if killScript then return end
         Press = Press:lower()
         if Press == "g" then
             if dancing then
@@ -745,7 +745,7 @@ mouse.KeyDown:connect(
                     function()
                         coroutine.wrap(
                             function()
-                                while dancing and _G.JustsMiztHubDisabled == false do
+                                while dancing and not killScript do
                                     ROOTLERP.C0 =
                                         ROOTLERP.C0:Lerp(
                                         CFrame.new(2 * math.sin(sine / 9), -.4 + .1 * math.sin(sine / 3), 0) *
@@ -756,7 +756,7 @@ mouse.KeyDown:connect(
                                 end
                             end
                         )()
-                        while dancing and _G.JustsMiztHubDisabled == false do
+                        while dancing and not killScript do
                             for i = 1, 28 do
                                 if not dancing then
                                     break
@@ -846,7 +846,7 @@ mouse.KeyDown:connect(
 
 mouse.KeyDown:connect(
     function(Press)
-		if amdead then return end
+		if killScript then return end
         Press = Press:lower()
         if Press == "f" then
             if dancing then
@@ -863,7 +863,7 @@ mouse.KeyDown:connect(
                 bennyhill:Play()
                 coroutine.wrap(
                     function()
-                        while dancing and _G.JustsMiztHubDisabled == false do
+                        while dancing and not killScript do
                             ROOTLERP.C0 =
                                 ROOTLERP.C0:Lerp(
                                 CFrame.new(0, -.4, 0) *
@@ -912,7 +912,7 @@ mouse.KeyDown:connect(
 
 mouse.KeyDown:connect(
     function(Press)
-		if amdead then return end
+		if killScript then return end
         Press = Press:lower()
         if Press == "p" then
             if dancing then
@@ -944,7 +944,7 @@ mouse.KeyDown:connect(
                     "http://www.roblox.com/asset/?id=31082268"
                 coroutine.wrap(
                     function()
-                        while dancing and _G.JustsMiztHubDisabled == false do
+                        while dancing and not killScript do
                             ROOTLERP.C0 =
                                 ROOTLERP.C0:Lerp(
                                 CFrame.new(5 * math.sin(sine / 8), -1.8, 0) *
@@ -977,7 +977,7 @@ mouse.KeyDown:connect(
 
 mouse.KeyDown:connect(
     function(Press)
-		if amdead then return end
+		if killScript then return end
         Press = Press:lower()
         if Press == "q" then
             if dancing then
@@ -995,7 +995,7 @@ mouse.KeyDown:connect(
                 attacking = true
                 coroutine.wrap(
                     function()
-                        while dancing and _G.JustsMiztHubDisabled == false do
+                        while dancing and not killScript do
                             spinningmove = spinningmove + 10
                             RIGHTLEGLERP.C0 =
                                 RIGHTLEGLERP.C0:lerp(
@@ -1043,7 +1043,7 @@ mouse.KeyDown:connect(
 
 mouse.KeyDown:connect(
     function(Press)
-		if amdead then return end
+		if killScript then return end
         Press = Press:lower()
         if Press == "u" then
             if dancing then
@@ -1060,7 +1060,7 @@ mouse.KeyDown:connect(
                 slavdance:Play()
                 coroutine.wrap(
                     function()
-                        while dancing and _G.JustsMiztHubDisabled == false do
+                        while dancing and not killScript do
                             for i = 1, 17 do
                                 if not dancing then
                                     break
@@ -1159,7 +1159,7 @@ mouse.KeyDown:connect(
 
 mouse.KeyDown:connect(
     function(Press)
-		if amdead then return end
+		if killScript then return end
         Press = Press:lower()
         if Press == "y" then
             if dancing then
@@ -1179,7 +1179,7 @@ mouse.KeyDown:connect(
                 truelegend:Play()
                 coroutine.wrap(
                     function()
-                        while dancing and _G.JustsMiztHubDisabled == false do
+                        while dancing and not killScript do
                             for i = 1, 100 do
                                 if not dancing then
                                     break
@@ -1285,7 +1285,7 @@ mouse.KeyDown:connect(
 
 mouse.KeyDown:connect(
     function(Press)
-		if amdead then return end
+		if killScript then return end
         Press = Press:lower()
         if Press == "t" then
             if dancing then
@@ -1302,7 +1302,7 @@ mouse.KeyDown:connect(
                 plummusic:Play()
                 coroutine.wrap(
                     function()
-                        while dancing and _G.JustsMiztHubDisabled == false do
+                        while dancing and not killScript do
                             for i = 1, 20 do
                                 if not dancing then
                                     break
@@ -1378,7 +1378,7 @@ mouse.KeyDown:connect(
 
 mouse.KeyDown:connect(
     function(Press)
-		if amdead then return end
+		if killScript then return end
         Press = Press:lower()
         if Press == "e" then
             if dancing then
@@ -1396,7 +1396,7 @@ mouse.KeyDown:connect(
                 mrozo:Play()
                 coroutine.wrap(
                     function()
-                        while dancing and _G.JustsMiztHubDisabled == false do
+                        while dancing and not killScript do
                             RIGHTLEGLERP.C0 =
                                 RIGHTLEGLERP.C0:lerp(
                                 CFrame.new(-0.3, 2, 0) * CFrame.Angles(0, math.rad(0), math.rad(-10)),
@@ -1451,7 +1451,7 @@ mouse.KeyDown:connect(
 
 mouse.KeyDown:connect(
     function(Press)
-		if amdead then return end
+		if killScript then return end
         Press = Press:lower()
         if Press == "r" then
             if dancing then
@@ -1469,7 +1469,7 @@ mouse.KeyDown:connect(
                 spinme:Play()
                 coroutine.wrap(
                     function()
-                        while dancing and _G.JustsMiztHubDisabled == false do
+                        while dancing and not killScript do
                             recordbaby = recordbaby + 10
                             RIGHTLEGLERP.C0 =
                                 RIGHTLEGLERP.C0:lerp(
@@ -1518,7 +1518,7 @@ checks1 =
     coroutine.wrap(
     function()
         -------Checks
-        while true and _G.JustsMiztHubDisabled == false do
+        while true and not killScript do
             hf =
                 ray(
                 Root.Position,
@@ -1557,7 +1557,7 @@ OrgnC0 = Neck.C0
 local movelimbs =
     coroutine.wrap(
     function()
-        while RunSrv.RenderStepped:wait() and _G.JustsMiztHubDisabled == false do
+        while RunSrv.RenderStepped:wait() and not killScript do
             TrsoLV = Torso.CFrame.lookVector
             Dist = nil
             Diff = nil
@@ -1624,7 +1624,7 @@ for e = 1, #immortal do
             end
             PART.AncestryChanged:connect(
                 function()
-					if amdead then return end
+					if killScript then return end
                     PART.Parent = PARENT
                 end
             )
@@ -1636,7 +1636,7 @@ for e = 1, #immortal do
             end
             PART.AncestryChanged:connect(
                 function()
-					if amdead then return end
+					if killScript then return end
                     PART.Parent = PARENT
                 end
             )
@@ -1647,7 +1647,7 @@ end
 local anims =
     coroutine.wrap(
     function()
-        while true and _G.JustsMiztHubDisabled == false do
+        while true and not killScript do
             settime = 0.05
             sine = sine + change
             if position == "Jump" and attacking == false then
