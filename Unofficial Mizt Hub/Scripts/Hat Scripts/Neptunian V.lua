@@ -11778,7 +11778,12 @@ function MagniDamage(Part, magni, mindam, maxdam, knock, Type, Sound)
     for _, c in pairs(workspace:children()) do
         local hum = c:findFirstChildOfClass("Humanoid")
         if hum ~= nil then
-            local head = c:findFirstChild("Torso")
+            local head = nil
+            for i,v in pairs(c:GetChildren()) do
+                if v:IsA("Part") and v.Name == "Torso" then
+                    head = v
+                end
+            end
             if head ~= nil then
                 local targ = head.Position - Part.Position
                 local mag = targ.magnitude
@@ -11786,7 +11791,12 @@ function MagniDamage(Part, magni, mindam, maxdam, knock, Type, Sound)
                     Damagefunc(head, head, mindam, maxdam, knock, Type, RootPart, 0.1, "rbxassetid://" .. Sound, 1)
                 end
             end
-            local head = c:findFirstChild("UpperTorso")
+            local head = nil
+            for i,v in pairs(c:GetChildren()) do
+                if v:IsA("Part") and v.Name == "UpperTorso" then
+                    head = v
+                end
+            end
             if head ~= nil then
                 local targ = head.Position - Part.Position
                 local mag = targ.magnitude
@@ -11800,196 +11810,6 @@ end
 
 function rayCast(Pos, Dir, Max, Ignore) -- Origin Position , Direction, MaxDistance , IgnoreDescendants
     return game:service("Workspace"):FindPartOnRay(Ray.new(Pos, Dir.unit * (Max or 999.999)), Ignore)
-end
-----
-
-function dmg(dude)
-    if dude.Name ~= Character then
-        local bgf = Instance.new("BodyGyro", dude.Head)
-        bgf.CFrame = bgf.CFrame * CFrame.fromEulerAnglesXYZ(math.rad(-90), 0, 0)
-         --
-        --[[local val = Instance.new("BoolValue",dude)
-val.Name = "IsHit"]] local ds =
-            coroutine.wrap(
-            function()
-                dude:WaitForChild("Head"):BreakJoints()
-                for i, v in pairs(dude:GetChildren()) do
-                    if v:IsA("Part") or v:IsA("MeshPart") then
-                        v.Name = "DEMINISHED"
-                        CFuncs["Sound"].Create("rbxassetid://763718160", v, 0.75, 1.1)
-                        CFuncs["Sound"].Create("rbxassetid://782353443", v, 1, 1)
-                        for i = 0, 1 do
-                            sphere2(
-                                1,
-                                "Add",
-                                v.CFrame *
-                                    CFrame.Angles(
-                                        math.rad(math.random(-360, 360)),
-                                        math.rad(math.random(-360, 360)),
-                                        math.rad(math.random(-360, 360))
-                                    ),
-                                vt(1, 1, 1),
-                                -0.01,
-                                10,
-                                -0.01,
-                                BrickColor.new("Royal purple"),
-                                BrickColor.new("Royal purple").Color
-                            )
-                        end
-                    end
-                end
-                wait(0.5)
-                targetted = nil
-                CFuncs["Sound"].Create("rbxassetid://62339698", char, 0.25, 0.285)
-                coroutine.resume(
-                    coroutine.create(
-                        function()
-                            for i, v in pairs(dude:GetChildren()) do
-                                if v:IsA("Accessory") then
-                                    v:Destroy()
-                                end
-                                if v:IsA("Humanoid") then
-                                    v:Destroy()
-                                end
-                                if v:IsA("CharacterMesh") then
-                                    v:Destroy()
-                                end
-                                if v:IsA("Model") then
-                                    v:Destroy()
-                                end
-                                if v:IsA("Part") or v:IsA("MeshPart") then
-                                    for x, o in pairs(v:GetChildren()) do
-                                        if o:IsA("Decal") then
-                                            o:Destroy()
-                                        end
-                                    end
-                                    coroutine.resume(
-                                        coroutine.create(
-                                            function()
-                                                v.Material = "Neon"
-                                                v.CanCollide = false
-                                                v.Anchored = false
-                                                local bld = Instance.new("ParticleEmitter", v)
-                                                bld.LightEmission = 1
-                                                bld.Texture = "rbxassetid://363275192" ---284205403
-                                                bld.Color = ColorSequence.new(BrickColor.new("Royal purple").Color)
-                                                bld.Rate = 500
-                                                bld.Lifetime = NumberRange.new(1)
-                                                bld.Size =
-                                                    NumberSequence.new(
-                                                    {
-                                                        NumberSequenceKeypoint.new(0, 2, 0),
-                                                        NumberSequenceKeypoint.new(0.8, 2.25, 0),
-                                                        NumberSequenceKeypoint.new(1, 0, 0)
-                                                    }
-                                                )
-                                                bld.Transparency =
-                                                    NumberSequence.new(
-                                                    {
-                                                        NumberSequenceKeypoint.new(0, 0.5, 0),
-                                                        NumberSequenceKeypoint.new(0.8, 0.75, 0),
-                                                        NumberSequenceKeypoint.new(1, 1, 0)
-                                                    }
-                                                )
-                                                bld.Speed = NumberRange.new(2, 5)
-                                                bld.VelocitySpread = 50000
-                                                bld.Rotation = NumberRange.new(-500, 500)
-                                                bld.RotSpeed = NumberRange.new(-500, 500)
-                                                local sbs = Instance.new("BodyPosition", v)
-                                                sbs.P = 3000
-                                                sbs.D = 1000
-                                                sbs.maxForce = Vector3.new(50000000000, 50000000000, 50000000000)
-                                                sbs.position =
-                                                    v.Position +
-                                                    Vector3.new(
-                                                        math.random(-2, 2),
-                                                        10 + math.random(-2, 2),
-                                                        math.random(-2, 2)
-                                                    )
-                                                v.Color = BrickColor.new("Royal purple").Color
-                                                coroutine.resume(
-                                                    coroutine.create(
-                                                        function()
-                                                            for i = 0, 49 do
-                                                                swait(1)
-                                                                v:BreakJoints()
-                                                                v.Transparency = v.Transparency + 0.02
-                                                            end
-                                                            v:BreakJoints()
-                                                            for i = 0, 4 do
-                                                                slash(
-                                                                    math.random(10, 50) / 10,
-                                                                    3,
-                                                                    true,
-                                                                    "Round",
-                                                                    "Add",
-                                                                    "Out",
-                                                                    v.CFrame *
-                                                                        CFrame.Angles(
-                                                                            math.rad(math.random(-360, 360)),
-                                                                            math.rad(math.random(-360, 360)),
-                                                                            math.rad(math.random(-360, 360))
-                                                                        ),
-                                                                    vt(0.01, 0.0025, 0.01),
-                                                                    math.random(10, 100) / 2500,
-                                                                    BrickColor.new("White")
-                                                                )
-                                                            end
-                                                            block(
-                                                                1,
-                                                                "Add",
-                                                                v.CFrame,
-                                                                vt(0, 0, 0),
-                                                                0.1,
-                                                                0.1,
-                                                                0.1,
-                                                                BrickColor.new("Royal purple"),
-                                                                BrickColor.new("Royal purple").Color
-                                                            )
-                                                            CFuncs["Sound"].Create(
-                                                                "rbxassetid://782353117",
-                                                                v,
-                                                                0.25,
-                                                                1.2
-                                                            )
-                                                            CFuncs["Sound"].Create(
-                                                                "rbxassetid://1192402877",
-                                                                v,
-                                                                0.5,
-                                                                0.75
-                                                            )
-                                                            bld.Speed = NumberRange.new(10, 25)
-                                                            bld.Drag = 5
-                                                            bld.Acceleration = vt(0, 2, 0)
-                                                            wait(0.5)
-                                                            bld.Enabled = false
-                                                            wait(4)
-                                                            coroutine.resume(
-                                                                coroutine.create(
-                                                                    function()
-                                                                        for i = 0, 99 do
-                                                                            swait()
-                                                                            v:Destroy()
-                                                                            dude:Destroy()
-                                                                        end
-                                                                    end
-                                                                )
-                                                            )
-                                                        end
-                                                    )
-                                                )
-                                            end
-                                        )
-                                    )
-                                end
-                            end
-                        end
-                    )
-                )
-            end
-        )
-        ds()
-    end
 end
 
 function sphere(bonuspeed, type, pos, scale, value, color)
