@@ -1,19 +1,3 @@
-_G.MiztReanimSettings = {
-    PermanentDeath = true,
-    NoHeadPermanentDeath = false,
-    Noclip = noclip,
-    HatReanimate = false,
-    SemiHatReanimate = false,
-    UseMizaruTorso = true,
-    FlingActive = true,
-    AlignMethod = false,
-    Netless = true,
-    ActiveLegacyNet = true,
-    NetlessVelocity = {0, 0, -50}
-}
-
-loadstring(game:HttpGet("https://raw.githubusercontent.com/Sylixe/Scripts/main/MiztReanimate.lua", true))()
-
 local killScript = false
 
 coroutine.wrap(function()
