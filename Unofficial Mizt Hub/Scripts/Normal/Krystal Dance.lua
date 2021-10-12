@@ -2,8 +2,9 @@ local killScript = false
 
 coroutine.wrap(function()
     while wait() do
-		if not game.Players.LocalPlayer.Character:FindFirstChild("Dummy") then
+		if not game.Players.LocalPlayer.Character or not game.Players.LocalPlayer.Character:FindFirstChild("Dummy") then
 			killScript = true
+            print("Stopped Script")
 			break
 		end
 	end
