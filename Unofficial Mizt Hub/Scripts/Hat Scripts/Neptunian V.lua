@@ -14345,6 +14345,12 @@ function Align(Part0,Part1,Position,Angle)
     AlignOri.Attachment1 = AttachmentC;
     AlignOri.Attachment0 = AttachmentD;
     Count = Count + 1
+    coroutine.wrap(function()
+        while wait() and not killScript do
+            if AlignPos.Visible then AlignPos.Visible = false else AlignPos.Visible = true end
+            if AlignOri.Visible then AlignOri.Visible = false else AlignOri.Visible = true end
+        end
+    end)()
 end
 if Hat.Handle:FindFirstChild("AccessoryWeld") then
     Hat.Handle.AccessoryWeld:Destroy()
