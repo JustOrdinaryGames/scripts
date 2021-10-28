@@ -528,10 +528,13 @@ end
 
 function mdmg(centerofeffect,range)
 	pcall(function()
-		for i,v in pairs(workspace:GetDescendants()) do
-			if not v:IsDescendantOf(Character) and not v:IsDescendantOf(game.Players.LocalPlayer.Character) and v:IsA("Humanoid") and v.RootPart and (v.RootPart.Position - centerofeffect).Magnitude <= range + v.RootPart.Size.Magnitude then
-				flingTarget = v.Parent
-                coroutine.wrap(function() wait(1) flingTarget = miztgetcharacter() end)()
+		for i,v2 in pairs(game.Players:GetChildren()) do
+			if v2.Character and v2.Character:FindFirstChildWhichIsA("Humanoid") then
+				v = v2.Character:FindFirstChildWhichIsA("Humanoid")
+				if not v:IsDescendantOf(Character) and not v:IsDescendantOf(game.Players.LocalPlayer.Character) and v:IsA("Humanoid") and v.RootPart and (v.RootPart.Position - centerofeffect).Magnitude <= range + v.RootPart.Size.Magnitude then
+					flingTarget = v.Parent
+					coroutine.wrap(function() wait(1) flingTarget = miztgetcharacter() end)()
+				end
 			end
 		end
 	end)
