@@ -95,31 +95,31 @@ local drawScreen = game.RunService.RenderStepped:Connect(function()
             text:Remove()
             return bounds.X
         end
-        drawScreenFunc(args, mouse.X, mouse.Y)
+        drawScreenFunc(args, mouse.X, mouse.Y + 36)
     end
 end)
 
 local mouse1D = mouse.Button1Down:Connect(function()
     if mouseClickedFunc ~= nil then
-        mouseClickedFunc(mouse.X, mouse.Y, 0)
+        mouseClickedFunc(mouse.X, mouse.Y + 36, 0)
     end
 end)
 
 local mouse2D = mouse.Button2Down:Connect(function()
     if mouseClickedFunc ~= nil then
-        mouseClickedFunc(mouse.X, mouse.Y, 1)
+        mouseClickedFunc(mouse.X, mouse.Y + 36, 1)
     end
 end)
 
 local mouse1U = mouse.Button1Up:Connect(function()
     if mouseReleasedFunc ~= nil then
-        mouseReleasedFunc(mouse.X, mouse.Y, 0)
+        mouseReleasedFunc(mouse.X, mouse.Y + 36, 0)
     end
 end)
 
 local mouse2U = mouse.Button2Up:Connect(function()
     if mouseReleasedFunc ~= nil then
-        mouseReleasedFunc(mouse.X, mouse.Y, 1)
+        mouseReleasedFunc(mouse.X, mouse.Y + 36, 1)
     end
 end)
 
@@ -136,7 +136,7 @@ coroutine.wrap(function()
                 v:Remove()
             end
             pastDraws = {}
-            print('Unhooked Successfully')
+            --print('Unhooked Successfully')
             break
         end
     end
