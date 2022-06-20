@@ -60,7 +60,7 @@ local drawScreen = game.RunService.RenderStepped:Connect(function()
             text.Transparency = 1
             text.Color = color
             text.Text = msg
-            text.Font = 2
+            text.Font = 3
             if transparency ~= nil then
                 text.Transparency = 1 - transparency -- Converts bullshit transparency to not bullshit transparency
             end
@@ -76,7 +76,7 @@ local drawScreen = game.RunService.RenderStepped:Connect(function()
             text.Text = msg
             text.Outline = true
             text.OutlineColor = outline
-            text.Font = 2
+            text.Font = 3
             if transparency ~= nil then
                 text.Transparency = 1 - transparency -- Converts bullshit transparency to not bullshit transparency
             end
@@ -90,7 +90,7 @@ local drawScreen = game.RunService.RenderStepped:Connect(function()
             text.Transparency = 1
             text.Color = Color3.new(1,1,1)
             text.Text = msg
-            text.Font = 2
+            text.Font = 3
             local bounds = text.TextBounds
             text:Remove()
             return bounds.X
