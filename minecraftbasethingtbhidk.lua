@@ -17,122 +17,126 @@ function lib:ConnectToMouseReleased(func)
     mouseReleasedFunc = func
 end
 
+function getGui()
+    local args = {}
+    function args.drawRect(x,y,width,height,color,transparency)
+        local square = Drawing.new("Square")
+        square.Position = Vector2.new(x,y)
+        square.Size = Vector2.new(width,height)
+        square.Visible = true
+        square.Transparency = 1
+        square.Color = color
+        if transparency ~= nil then
+            square.Transparency = 1 - transparency -- Converts bullshit transparency to not bullshit transparency
+        end
+        table.insert(pastDraws, square)
+    end
+    function args.drawImage(x,y,width,height,color,imageurl,transparency)
+        if savedImages[imageurl] == nil then
+            savedImages[imageurl] = game:HttpGet(imageurl)
+        end
+        local square = Drawing.new("Image")
+        square.Position = Vector2.new(x,y)
+        square.Size = Vector2.new(width,height)
+        square.Visible = true
+        square.Transparency = 1
+        square.Color = color
+        square.Data = savedImages[imageurl]
+        if transparency ~= nil then
+            square.Transparency = 1 - transparency -- Converts bullshit transparency to not bullshit transparency
+        end
+        table.insert(pastDraws, square)
+    end
+    function args.drawString(msg,x,y,size,color,transparency)
+        local text = Drawing.new("Text")
+        text.Position = Vector2.new(x,y)
+        text.Size = size
+        text.Visible = true
+        text.Transparency = 1
+        text.Color = color
+        text.Text = msg
+        text.Font = 3
+        if transparency ~= nil then
+            text.Transparency = 1 - transparency -- Converts bullshit transparency to not bullshit transparency
+        end
+        table.insert(pastDraws, text)
+    end
+    function args.drawStringWithOutline(msg,x,y,size,color,outline,transparency)
+        local text = Drawing.new("Text")
+        text.Position = Vector2.new(x,y)
+        text.Size = size
+        text.Visible = true
+        text.Transparency = 1
+        text.Color = color
+        text.Text = msg
+        text.Outline = true
+        text.OutlineColor = outline
+        text.Font = 3
+        if transparency ~= nil then
+            text.Transparency = 1 - transparency -- Converts bullshit transparency to not bullshit transparency
+        end
+        table.insert(pastDraws, text)
+    end
+    function args.getStringWidth(msg, size)
+        local text = Drawing.new("Text")
+        text.Position = Vector2.new(-100000,-100000)
+        text.Size = size
+        text.Visible = true
+        text.Transparency = 1
+        text.Color = Color3.new(1,1,1)
+        text.Text = msg
+        text.Font = 3
+        local bounds = text.TextBounds
+        text:Remove()
+        return bounds.X
+    end
+    function args.getFontHeight(size)
+        local text = Drawing.new("Text")
+        text.Position = Vector2.new(-100000,-100000)
+        text.Size = size
+        text.Visible = true
+        text.Transparency = 1
+        text.Color = Color3.new(1,1,1)
+        text.Text = 'test'
+        text.Font = 3
+        local bounds = text.TextBounds
+        text:Remove()
+        return bounds.Y
+    end
+    return args
+end
+
 local drawScreen = game.RunService.RenderStepped:Connect(function()
     for i,v in pairs(pastDraws) do
         v:Remove()
     end
     pastDraws = {}
     if drawScreenFunc ~= nil then
-        local args = {}
-        function args.drawRect(x,y,width,height,color,transparency)
-            local square = Drawing.new("Square")
-            square.Position = Vector2.new(x,y)
-            square.Size = Vector2.new(width,height)
-            square.Visible = true
-            square.Transparency = 1
-            square.Color = color
-            if transparency ~= nil then
-                square.Transparency = 1 - transparency -- Converts bullshit transparency to not bullshit transparency
-            end
-            table.insert(pastDraws, square)
-        end
-        function args.drawImage(x,y,width,height,color,imageurl,transparency)
-            if savedImages[imageurl] == nil then
-                savedImages[imageurl] = game:HttpGet(imageurl)
-            end
-            local square = Drawing.new("Image")
-            square.Position = Vector2.new(x,y)
-            square.Size = Vector2.new(width,height)
-            square.Visible = true
-            square.Transparency = 1
-            square.Color = color
-            square.Data = savedImages[imageurl]
-            if transparency ~= nil then
-                square.Transparency = 1 - transparency -- Converts bullshit transparency to not bullshit transparency
-            end
-            table.insert(pastDraws, square)
-        end
-        function args.drawString(msg,x,y,size,color,transparency)
-            local text = Drawing.new("Text")
-            text.Position = Vector2.new(x,y)
-            text.Size = size
-            text.Visible = true
-            text.Transparency = 1
-            text.Color = color
-            text.Text = msg
-            text.Font = 3
-            if transparency ~= nil then
-                text.Transparency = 1 - transparency -- Converts bullshit transparency to not bullshit transparency
-            end
-            table.insert(pastDraws, text)
-        end
-        function args.drawStringWithOutline(msg,x,y,size,color,outline,transparency)
-            local text = Drawing.new("Text")
-            text.Position = Vector2.new(x,y)
-            text.Size = size
-            text.Visible = true
-            text.Transparency = 1
-            text.Color = color
-            text.Text = msg
-            text.Outline = true
-            text.OutlineColor = outline
-            text.Font = 3
-            if transparency ~= nil then
-                text.Transparency = 1 - transparency -- Converts bullshit transparency to not bullshit transparency
-            end
-            table.insert(pastDraws, text)
-        end
-        function args.getStringWidth(msg, size)
-            local text = Drawing.new("Text")
-            text.Position = Vector2.new(-100000,-100000)
-            text.Size = size
-            text.Visible = true
-            text.Transparency = 1
-            text.Color = Color3.new(1,1,1)
-            text.Text = msg
-            text.Font = 3
-            local bounds = text.TextBounds
-            text:Remove()
-            return bounds.X
-        end
-        function args.getFontHeight(size)
-            local text = Drawing.new("Text")
-            text.Position = Vector2.new(-100000,-100000)
-            text.Size = size
-            text.Visible = true
-            text.Transparency = 1
-            text.Color = Color3.new(1,1,1)
-            text.Text = 'test'
-            text.Font = 3
-            local bounds = text.TextBounds
-            text:Remove()
-            return bounds.Y
-        end
-        drawScreenFunc(args, mouse.X, mouse.Y + 36)
+        drawScreenFunc(getGui(), mouse.X, mouse.Y + 36)
     end
 end)
 
 local mouse1D = mouse.Button1Down:Connect(function()
     if mouseClickedFunc ~= nil then
-        mouseClickedFunc(mouse.X, mouse.Y + 36, 0)
+        mouseClickedFunc(getGui(), mouse.X, mouse.Y + 36, 0)
     end
 end)
 
 local mouse2D = mouse.Button2Down:Connect(function()
     if mouseClickedFunc ~= nil then
-        mouseClickedFunc(mouse.X, mouse.Y + 36, 1)
+        mouseClickedFunc(getGui(), mouse.X, mouse.Y + 36, 1)
     end
 end)
 
 local mouse1U = mouse.Button1Up:Connect(function()
     if mouseReleasedFunc ~= nil then
-        mouseReleasedFunc(mouse.X, mouse.Y + 36, 0)
+        mouseReleasedFunc(getGui(), mouse.X, mouse.Y + 36, 0)
     end
 end)
 
 local mouse2U = mouse.Button2Up:Connect(function()
     if mouseReleasedFunc ~= nil then
-        mouseReleasedFunc(mouse.X, mouse.Y + 36, 1)
+        mouseReleasedFunc(getGui(), mouse.X, mouse.Y + 36, 1)
     end
 end)
 
